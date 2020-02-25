@@ -6,14 +6,20 @@
 
 // Haciendo un ejemplo similar a express
 // dónde se llama a un método y el se le entrega un callback como parámetro
-// Y en ese callback escribimos nuestra lógica
+// Y en ese callback escribimos nuestra lógica'
+const app = (route, callback) => {
+  //...
+  //...
+  callback(req, res);
+}
+
 app.get('/users', (req, res) => {
-  // Do something
+  // Do something...
 })
 
-// Método interno
-const f = (ruta, callback) => {
-  const requestResult = requestMethod(ruta);
+// Método interno, el callback es una función entregada como parámetro
+const f = (route, callback) => {
+  const requestResult = requestMethod(route);
   callback(requestResult);
 }
 
@@ -29,4 +35,8 @@ const handleResult = (result) => {
   // Do something
 }
 
+// Esto es redundante, estamos creando una función que recibe resultado
+// y luego le pasa a handleResult el resultado y luego lo ejecuta
+f('/users', (result) => handleResult());
+// es lo mismo que escribir esto
 f('/users', handleResult);
